@@ -115,7 +115,7 @@ possuam.
 
 Como forma de auxiliar o preenchimento de alguns valores de lista, a bibliotéca disponibiliza um arquivo de lista
 enumeradas (Enum). O arquivo de Enum encontra-se no diretório
-```/Helpers```, mas também e acessado de forma autormática
+```/Helpers```, mas também e acessado de forma automática
 conforme [documentação](https://www.php.net/manual/pt_BR/language.enumerations.basics.php) oficial do PHP.
 
 ## Contribuição ##
