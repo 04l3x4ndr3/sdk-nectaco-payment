@@ -1,8 +1,9 @@
 <?php
+namespace O4l3x4ndr3\SdkNectaco\Context;
 
 use GuzzleHttp\Exception\GuzzleException;
 use O4l3x4ndr3\SdkNectaco\Configuration;
-use O4l3x4ndr3\SdkNectaco\Helpers\HTTPClient;
+use O4l3x4ndr3\SdkNectaco\Utils\HTTPClient;
 use O4l3x4ndr3\SdkNectaco\Types\Cartao;
 use O4l3x4ndr3\SdkNectaco\Types\Endereco;
 

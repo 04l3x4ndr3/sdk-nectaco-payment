@@ -1,8 +1,10 @@
 <?php
 
+namespace O4l3x4ndr3\SdkNectaco\Context;
+
 use GuzzleHttp\Exception\GuzzleException;
 use O4l3x4ndr3\SdkNectaco\Configuration;
-use O4l3x4ndr3\SdkNectaco\Helpers\HTTPClient;
+use O4l3x4ndr3\SdkNectaco\Utils\HTTPClient;
 
 /**
  * Classe responsável por gerenciar operações relacionadas a planos.
@@ -35,7 +37,7 @@ class Plano extends HTTPClient
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function create(\O4l3x4ndr3\SdkNectaco\Types\Plano $plano): object
+    public function criar(\O4l3x4ndr3\SdkNectaco\Types\Plano $plano): object
     {
         $endpoint = "/planos";
         $data = $plano->toArray();
@@ -52,7 +54,7 @@ class Plano extends HTTPClient
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function update(int $planoId, \O4l3x4ndr3\SdkNectaco\Types\Plano $plano): object
+    public function atualizar(int $planoId, \O4l3x4ndr3\SdkNectaco\Types\Plano $plano): object
     {
         $endpoint = "/planos/$planoId";
         $data = $plano->toArray();
@@ -68,7 +70,7 @@ class Plano extends HTTPClient
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function delete(int $plano): object
+    public function remover(int $plano): object
     {
         $endpoint = "/planos/$plano";
         return $this->call('DELETE', $endpoint);
@@ -83,7 +85,7 @@ class Plano extends HTTPClient
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function get(int $plano): object
+    public function detalhar(int $plano): object
     {
         $endpoint = "/planos/$plano";
         return $this->call('GET', $endpoint);
@@ -100,7 +102,7 @@ class Plano extends HTTPClient
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function list(array $filter = [], int $page = null, int $limit = null): object
+    public function listar(array $filter = [], int $page = null, int $limit = null): object
     {
         $endpoint = "/planos";
         $filter = array_filter(array_merge($filter, ['page' => $page, 'limit' => $limit]));

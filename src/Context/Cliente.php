@@ -1,8 +1,9 @@
 <?php
+namespace O4l3x4ndr3\SdkNectaco\Context;
 
 use GuzzleHttp\Exception\GuzzleException;
 use O4l3x4ndr3\SdkNectaco\Configuration;
-use O4l3x4ndr3\SdkNectaco\Helpers\HTTPClient;
+use O4l3x4ndr3\SdkNectaco\Utils\HTTPClient;
 
 /**
  * Classe Cliente.
@@ -42,7 +43,7 @@ class Cliente extends HTTPClient
      * @return object Objeto de resposta da API.
      * @throws GuzzleException Exceção lançada caso ocorra um erro na requisição HTTP.
      */
-    public function create(\O4l3x4ndr3\SdkNectaco\Types\Cliente $cliente): object
+    public function criar(\O4l3x4ndr3\SdkNectaco\Types\Cliente $cliente): object
     {
         $endpoint = "/clientes";
         $data = $cliente->toArray();
@@ -56,7 +57,7 @@ class Cliente extends HTTPClient
      * @return object Objeto de resposta da API.
      * @throws GuzzleException Exceção lançada caso ocorra um erro na requisição HTTP.
      */
-    public function delete(int $clienteId): object
+    public function remove(int $clienteId): object
     {
         $endpoint = "/clientes/$clienteId/excluir";
         return $this->call('DELETE', $endpoint);

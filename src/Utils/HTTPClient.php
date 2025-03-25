@@ -1,6 +1,6 @@
 <?php
 
-namespace O4l3x4ndr3\SdkNectaco\Helpers;
+namespace O4l3x4ndr3\SdkNectaco\Utils;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
