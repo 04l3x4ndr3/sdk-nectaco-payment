@@ -47,47 +47,47 @@ class Plano extends HTTPClient
     /**
      * Atualiza as informações de um plano existente.
      *
-     * @param int $planoId ID do plano que será atualizado.
+     * @param string $id ID do plano que será atualizado.
      * @param \O4l3x4ndr3\SdkNectaco\Types\Plano $plano Objeto do tipo Plano que contém os novos dados.
      *
      * @return object Retorna o objeto de resposta da chamada HTTP contendo os dados atualizados do plano.
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function atualizar(int $planoId, \O4l3x4ndr3\SdkNectaco\Types\Plano $plano): object
+    public function atualizar(string $id, \O4l3x4ndr3\SdkNectaco\Types\Plano $plano): object
     {
-        $endpoint = "/planos/$planoId";
-        $data = $plano->toArray();
-        return $this->call('PUT', $endpoint, array_filter($data));
+        $endpoint = "/planos/$id";
+        $data = array_filter($plano->toArray());
+        return $this->call('PUT', $endpoint, $data);
     }
 
     /**
      * Exclui um plano existente.
      *
-     * @param int $plano ID do plano que será excluído.
+     * @param string $id ID do plano que será excluído.
      *
      * @return object Retorna o objeto de resposta da chamada HTTP informando o resultado da exclusão.
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function remover(int $plano): object
+    public function remover(string $id): object
     {
-        $endpoint = "/planos/$plano";
+        $endpoint = "/planos/$id";
         return $this->call('DELETE', $endpoint);
     }
 
     /**
      * Recupera as informações de um plano específico.
      *
-     * @param int $plano ID do plano que será consultado.
+     * @param string $id ID do plano que será consultado.
      *
      * @return object Retorna o objeto de resposta da chamada HTTP contendo os dados do plano.
      *
      * @throws GuzzleException Caso ocorra algum erro durante a requisição HTTP.
      */
-    public function detalhar(int $plano): object
+    public function detalhar(string $id): object
     {
-        $endpoint = "/planos/$plano";
+        $endpoint = "/planos?id=$id";
         return $this->call('GET', $endpoint);
     }
 

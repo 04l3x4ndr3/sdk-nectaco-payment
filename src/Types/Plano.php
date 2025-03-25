@@ -39,7 +39,7 @@ class Plano
      * @param bool|null $expire_subscriptions
      * @param int|null $subscription_duration
      */
-    public function __construct(?string $name, ?string $description, ?string $email, ?int $setup_amount, ?int $amount, ?int $grace_period, ?int $tolerance_period, ?string $frequency, ?int $interval, ?string $logo, ?string $currency, ?string $payment_methods, ?string $plan_expiration_date, ?bool $has_expiration, ?bool $expire_subscriptions, ?int $subscription_duration)
+    public function __construct(?string $name = null, ?string $description = null, ?string $email = null, ?int $setup_amount = null, ?int $amount = null, ?int $grace_period = null, ?int $tolerance_period = null, ?string $frequency = null, ?int $interval = null, ?string $logo = null, ?string $currency = null, ?string $payment_methods = null, ?string $plan_expiration_date = null, ?bool $has_expiration = null, ?bool $expire_subscriptions = null, ?int $subscription_duration = null)
     {
         $this->name = $name;
         $this->description = $description;

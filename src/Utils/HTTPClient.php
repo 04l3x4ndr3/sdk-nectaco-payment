@@ -12,19 +12,20 @@ class HTTPClient
     private ?array $header;
     private string $requestBody = '';
     private string $http_errors;
+    private ?string $apiToken;
 
     /**
      * @param Configuration|null $config
      */
     public function __construct(?Configuration $config = null)
     {
-        $this->http_errors = false;
-
+        $this->http_errors = true;
         $this->config = $config ?? new Configuration();
         $this->header = array_merge([
             "User-Agent" => "SdkNectaco/1.0",
             "Accept" => "Application/json",
         ], $this->config->getHttpHeader());
+        $this->apiToken = null;
     }
 
     /**
@@ -40,10 +41,13 @@ class HTTPClient
         $client = new Client();
         $url = $this->config->getUrl($context) . $endpoint;
 
+        if (!empty($this->apiToken)) {
+            $this->header['Authorization'] = "Bearer {$this->apiToken}";
+        }
+
         $options = array_filter([
             'headers' => $this->header,
             'json' => $data,
-            'token' => $this->config->getToken()
         ]);
 
         $options['http_errors'] = $this->http_errors;
@@ -52,7 +56,7 @@ class HTTPClient
 
         $res = $client->request($method, $url, $options);
 
-        return json_decode($res->getBody());
+        return json_decode($res->getBody()->getContents());
     }
 
     /**
@@ -74,24 +78,35 @@ class HTTPClient
     }
 
     /**
+     * @return string|null
+     */
+    public function getApiToken(): ?string
+    {
+        return $this->apiToken;
+    }
+
+    /**
      * @param string|null $email
      * @param string|null $password
      * @return object
      * @throws GuzzleException
      */
-    public function createToken(?string $email = null, ?string $password = null): object
+    public function createToken(?string $email = null, ?string $password = null): HTTPClient
     {
-        $req = $this->call('POST', '/createToken', [
+        $data = array_filter([
             "email" => $email ?? $this->config->getEmail(),
             "password" => $password ?? $this->config->getPassword(),
         ]);
+        $req = $this->call('POST', '/createToken', $data);
 
         if (isset($req->error)) {
-            throw new \Exception($req->error, 401);
+            var_dump($req);
+            exit();
+            //throw new \Exception($req->error, 401);
         }
 
-        $this->config->setToken($req->token);
+        $this->apiToken = $req->token;
 
-        return $req->token;
+        return $this;
     }
 }

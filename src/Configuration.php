@@ -33,6 +33,7 @@ class Configuration
         $this->environment = $environment ?? $_SERVER['NECTACO_ENVIRONMENT'] ?? self::ENV_DEVELOPMENT;
         $this->email = $_SERVER['NECTACO_EMAIL'] ?? $email;
         $this->password = $_SERVER['NECTACO_PASSWORD'] ?? $password;
+        $this->token = $_SERVER['NECTACO_TOKEN'] ?? null;
         $this->httpHeader = [];
     }
 
