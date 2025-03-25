@@ -88,7 +88,15 @@ class Plano extends HTTPClient
     public function detalhar(string $id): object
     {
         $endpoint = "/planos?id=$id";
-        return $this->call('GET', $endpoint);
+        $ret = $this->call('GET', $endpoint);
+
+        // adapta a estrutura de retorno para registro único
+        if (isset($ret->planos)) {
+            $ret->plano = $ret->planos[0];
+            unset($ret->planos, $ret->paginas, $ret->quantidade);
+        }
+
+        return $ret;
     }
 
     /**
